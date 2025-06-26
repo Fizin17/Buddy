@@ -22,7 +22,8 @@
         android:layout_height="wrap_content"
         android:text="Testing"
         tools:layout_editor_absoluteX="182dp"
-        tools:layout_editor_absoluteY="140dp" />
+        tools:layout_editor_absoluteY="140dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:layout_width="match_parent"
