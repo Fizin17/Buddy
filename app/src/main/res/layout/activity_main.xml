@@ -24,4 +24,10 @@
         tools:layout_editor_absoluteX="182dp"
         tools:layout_editor_absoluteY="140dp" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="left"
+        android:text="ayri here" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
