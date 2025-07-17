@@ -15,18 +15,16 @@
         android:contentDescription="Profile Icon"
         app:tint="#0f5437" />
 
-    <!-- FIND FRIENDS Title -->
 
-    <!-- Search Icon at Top Right -->
     <TextView
         android:id="@+id/tvFindFriendsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/imgProfile"
-        android:layout_marginStart="49dp"
+        android:layout_marginStart="93dp"
         android:layout_marginTop="-1dp"
         android:layout_toEndOf="@id/imgProfile"
-        android:text="FIND FRIENDS"
+        android:text="FRIENDS"
         android:textColor="#0f5437"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -77,13 +75,6 @@
                 android:text="Alice"
                 android:textSize="18sp"
                 android:textColor="#0f5437" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/add"
-                android:contentDescription="Add Friend"
-                app:tint="#0f5437" />
         </LinearLayout>
 
         <!-- Friend Item 2 -->
@@ -109,12 +100,6 @@
                 android:textSize="18sp"
                 android:textColor="#0f5437" />
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/add"
-                android:contentDescription="Add Friend"
-                app:tint="#0f5437" />
         </LinearLayout>
 
         <!-- Friend Item 3 -->
@@ -140,16 +125,27 @@
                 android:textColor="#0f5437"
                 android:textSize="18sp" />
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="Add Friend"
-                android:src="@drawable/add"
-                app:tint="#0f5437" />
         </LinearLayout>
     </LinearLayout>
 
     <!-- Bottom Navigation Bar -->
+
+
+    <ImageButton
+        android:id="@+id/buttonAddFriend"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="80dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/circle_green"
+        android:contentDescription="Add Friend"
+        android:scaleType="centerInside"
+        android:src="@android:drawable/ic_input_add"
+        app:tint="#FFFFFF" />
+
+
     <LinearLayout
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"

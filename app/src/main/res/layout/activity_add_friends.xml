@@ -1,54 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFFDE7">
 
+    <ImageView
+        android:id="@+id/imgProfile"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/profile_icon"
+        android:contentDescription="Profile Icon"
+        app:tint="#0f5437" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD FRIEND"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="#004D40"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <!-- Form Container -->
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/formContainer"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textViewTitle"
+        android:layout_marginTop="20dp"
+        android:padding="20dp"
+        android:background="#004D40"
+        android:layout_marginBottom="70dp"
+        android:gravity="center"
+        android:layout_alignParentBottom="false"
+        android:elevation="4dp"
+        android:layout_centerInParent="true"
+        android:clipToPadding="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#004D40"
+        android:shape="rectangle"
+        android:clipChildren="false"
+        android:orientation="vertical">
 
+        <!-- Friend Name -->
         <EditText
             android:id="@+id/editTextName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
-            android:minHeight="48dp" />
+            android:layout_marginBottom="10dp"
+            android:background="#FFFFFF"
+            android:hint="Friend’s Name"
+            android:minHeight="48dp"
+            android:padding="10dp" />
 
+        <!-- Gender -->
         <EditText
             android:id="@+id/editTextGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="#FFFFFF"
             android:hint="Gender"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:padding="10dp" />
 
+        <!-- Date of Birth -->
         <EditText
             android:id="@+id/editTextDob"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Date of Birth (YYYY-MM-DD)"
-            android:minHeight="48dp" />
+            android:layout_marginBottom="10dp"
+            android:background="#FFFFFF"
+            android:hint="Date of Birth"
+            android:minHeight="48dp"
+            android:padding="10dp" />
 
+        <!-- Phone Number -->
         <EditText
             android:id="@+id/editTextPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="#FFFFFF"
             android:hint="Phone Number"
-            android:minHeight="48dp" />
+            android:inputType="phone"
+            android:minHeight="48dp"
+            android:padding="10dp" />
 
+        <!-- Email -->
         <EditText
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
-            android:minHeight="48dp" />
+            android:layout_marginBottom="20dp"
+            android:background="#FFFFFF"
+            android:hint="Email Address"
+            android:inputType="textEmailAddress"
+            android:minHeight="48dp"
+            android:padding="10dp" />
 
+        <!-- Add Button -->
         <Button
-            android:id="@+id/buttonAddFriend"
-            android:layout_width="match_parent"
+            android:id="@+id/buttonAdd"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Friend"
-            android:layout_marginTop="20dp" />
+            android:text="ADD"
+            android:layout_gravity="center"
+            android:backgroundTint="#FFFF"
+            android:textColor="#000" />
     </LinearLayout>
-</ScrollView>
+
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="#0f5437"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:gravity="center">
+
+        <!-- Home -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/home"
+                android:contentDescription="Home Icon"
+                app:tint="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Friend -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/friend"
+                android:contentDescription="Friend Icon"
+                app:tint="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Friend"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Report -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/report"
+                android:contentDescription="Report Icon"
+                app:tint="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Report"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
