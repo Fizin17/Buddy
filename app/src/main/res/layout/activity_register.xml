@@ -1,53 +1,123 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
-    android:orientation="vertical"
-    android:gravity="center"
-    tools:context=".Register">
+    android:background="#fefee8"
+    android:padding="24dp">
 
+    <!-- Title -->
     <TextView
-        android:id="@+id/textViewTitle"
+        android:id="@+id/tvRegisterTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
-        android:textSize="24sp"
+        android:text="Sign Up"
+        android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_marginBottom="32dp" />
+        android:textColor="#0f5437"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp" />
 
-    <EditText
-        android:id="@+id/editTextUsername"
+    <!-- Bottom Bar (unchanged, sticks to bottom) -->
+    <View
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="#0f5437" />
+
+    <!-- Input Box -->
+    <LinearLayout
+        android:id="@+id/registerBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username"
-        android:inputType="textPersonName"
-        android:layout_marginBottom="16dp" />
+        android:orientation="vertical"
+        android:layout_below="@id/tvRegisterTitle"
+        android:layout_marginTop="40dp"
+        android:padding="30dp"
+        android:background="#0f5437"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="20dp"
+        android:elevation="4dp"
+        android:gravity="center_horizontal">
 
-    <EditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:layout_marginBottom="24dp" />
+        <!-- Username Label -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
 
-    <Button
-        android:id="@+id/buttonRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:layout_marginBottom="16dp" />
+        <!-- Username Field -->
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:background="#FF0000"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            android:hint="Enter your username"
+            android:layout_marginBottom="20dp" />
 
-    <!-- ✅ Feedback TextView -->
-    <TextView
-        android:id="@+id/textViewStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="#FF0000"
-        android:textSize="16sp" />
+        <!-- Email Label -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
 
-</LinearLayout>
+        <!-- Email Field -->
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:background="#FF0000"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            android:hint="Enter your email"
+            android:inputType="textEmailAddress"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Password Label -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Password Field -->
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:background="#FF0000"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            android:hint="Enter your password"
+            android:inputType="textPassword"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Register Button -->
+        <ImageButton
+            android:id="@+id/btnRegister"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:contentDescription="Register"
+            android:src="@android:drawable/ic_media_play"
+            app:tint="#FFFFFF" />
+    </LinearLayout>
+
+</RelativeLayout>
