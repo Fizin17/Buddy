@@ -13,7 +13,7 @@
         android:layout_marginStart="20dp"
         android:src="@drawable/profile_icon"
         android:contentDescription="Profile Icon"
-        android:tint="#0f5437" />
+        app:tint="#0f5437" />
 
     <!-- HOME Title -->
 
@@ -76,11 +76,11 @@
         android:layout_marginBottom="80dp"
         android:layout_centerHorizontal="true">
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/your_graph_image_here"
-            android:contentDescription="Visual Graph" />
+<!--        <ImageView-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="100dp"-->
+<!--            android:src="@drawable/your_graph_image_here"-->
+<!--            android:contentDescription="Visual Graph" />-->
 
         <TextView
             android:layout_width="wrap_content"
@@ -116,7 +116,7 @@
                 android:layout_height="24dp"
                 android:src="@drawable/home"
                 android:contentDescription="Home Icon"
-                android:tint="#FFFFFF" />
+                app:tint="#FFFFFF" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -139,7 +139,7 @@
                 android:layout_height="24dp"
                 android:src="@drawable/friend"
                 android:contentDescription="Friend Icon"
-                android:tint="#FFFFFF" />
+                app:tint="#FFFFFF" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -162,7 +162,7 @@
                 android:layout_height="24dp"
                 android:src="@drawable/report"
                 android:contentDescription="Report Icon"
-                android:tint="#FFFFFF" />
+                app:tint="#FFFFFF" />
 
             <TextView
                 android:layout_width="wrap_content"
