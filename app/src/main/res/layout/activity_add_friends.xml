@@ -13,31 +13,36 @@
             android:id="@+id/editTextName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name" />
+            android:hint="Name"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/editTextGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Gender" />
+            android:hint="Gender"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/editTextDob"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Date of Birth (YYYY-MM-DD)" />
+            android:hint="Date of Birth (YYYY-MM-DD)"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/editTextPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone Number" />
+            android:hint="Phone Number"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email" />
+            android:hint="Email"
+            android:minHeight="48dp" />
 
         <Button
             android:id="@+id/buttonAddFriend"
