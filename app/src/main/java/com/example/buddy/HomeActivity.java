@@ -49,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
 
         btnReport.setOnClickListener(v ->{
             int userId = getIntent().getIntExtra("userId", -1);
-            Intent intent = new Intent(HomeActivity.this, Report.class);
+            Intent intent = new Intent(HomeActivity.this, ListByMonthActivity.class);
             intent.putExtra("userId", userId);
             startActivity(intent);
         });

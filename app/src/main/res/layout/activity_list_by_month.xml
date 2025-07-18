@@ -5,17 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/editTextMonth"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Month (e.g., 01 for Jan)" />
-
-    <Button
-        android:id="@+id/buttonSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Search" />
 
     <ListView
         android:id="@+id/listViewResults"
