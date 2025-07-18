@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Buddy.db";
-    public static final int DATABASE_VERSION = 2; // Force upgrade to update schema
+    public static final int DATABASE_VERSION = 3;
 
     public static final String USER_TABLE = "User";
     public static final String FRIEND_TABLE = "Friend";
@@ -22,20 +22,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // Enable foreign key support
+        db.execSQL("PRAGMA foreign_keys=ON;");
+
         // Create User table
         db.execSQL("CREATE TABLE " + USER_TABLE +
                 " (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE, password TEXT)");
 
-        // Create Friend table with correct column names
+        // Create Friend table with foreign key to User table
         db.execSQL("CREATE TABLE " + FRIEND_TABLE +
-                " (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, gender TEXT, date_of_birth TEXT, phone TEXT, email TEXT)");
+                " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "name TEXT, gender TEXT, date_of_birth TEXT, phone TEXT, email TEXT, " +
+                "user_id INTEGER, " +
+                "FOREIGN KEY(user_id) REFERENCES " + USER_TABLE + "(id) ON DELETE CASCADE)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop old tables and recreate them
-        db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + FRIEND_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
         onCreate(db);
     }
 
@@ -60,10 +65,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return exists;
     }
 
+    public int getUserId(String username, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT id FROM " + USER_TABLE +
+                " WHERE username = ? AND password = ?", new String[]{username, password});
+
+        int userId = -1;
+        if (cursor.moveToFirst()) {
+            userId = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+        }
+        cursor.close();
+        return userId;
+    }
+
     // ----------------------------
     // Friend Methods
     // ----------------------------
-    public boolean insertFriend(String name, String gender, String dob, String phone, String email) {
+    public boolean insertFriend(int userId, String name, String gender, String dob, String phone, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("name", name);
@@ -71,6 +89,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("date_of_birth", dob);
         values.put("phone", phone);
         values.put("email", email);
+        values.put("user_id", userId); // Associate friend with user
 
         long result = db.insert(FRIEND_TABLE, null, values);
 
@@ -81,11 +100,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
-    public ArrayList<String> getFriendsByMonth(String month) {
+    public ArrayList<String> getFriendsByMonth(String userId, String month) {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<String> list = new ArrayList<>();
         Cursor cursor = db.rawQuery("SELECT * FROM " + FRIEND_TABLE +
-                " WHERE strftime('%m', date_of_birth) = ?", new String[]{month});
+                " WHERE strftime('%m', date_of_birth) = ? AND user_id = ?", new String[]{month, userId});
 
         if (cursor.moveToFirst()) {
             do {
@@ -101,11 +120,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return list;
     }
 
-    public ArrayList<Friend> getAllFriends() {
+    public ArrayList<Friend> getAllFriends(int userId) {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Friend> friendList = new ArrayList<>();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + FRIEND_TABLE, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + FRIEND_TABLE + " WHERE user_id = ?",
+                new String[]{String.valueOf(userId)});
 
         if (cursor.moveToFirst()) {
             do {
@@ -122,5 +142,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return friendList;
     }
-
 }

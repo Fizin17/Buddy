@@ -17,11 +17,20 @@ public class Friends extends AppCompatActivity {
     FriendAdapter friendAdapter;
     ArrayList<Friend> friendList;
     DatabaseHelper dbHelper;
+    int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
+
+        // Get userId from intent
+        userId = getIntent().getIntExtra("userId", -1);
+        if (userId == -1) {
+            Toast.makeText(this, "User ID not found", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
 
         // Initialize views
         addFriend = findViewById(R.id.btnAddFriend);
@@ -30,7 +39,7 @@ public class Friends extends AppCompatActivity {
 
         // Initialize database and fetch data
         dbHelper = new DatabaseHelper(this);
-        friendList = dbHelper.getAllFriends();
+        friendList = dbHelper.getAllFriends(userId); // PASS userId
 
         // Create and set adapter — pass context and list
         friendAdapter = new FriendAdapter(Friends.this, friendList);
@@ -39,6 +48,7 @@ public class Friends extends AppCompatActivity {
         // Add friend button click
         addFriend.setOnClickListener(v -> {
             Intent intent = new Intent(Friends.this, AddFriendActivity.class);
+            intent.putExtra("userId", userId); // PASS userId to AddFriendActivity
             startActivity(intent);
         });
 
@@ -53,10 +63,8 @@ public class Friends extends AppCompatActivity {
 
         findViewById(R.id.btnReport).setOnClickListener(v -> {
             Intent intent = new Intent(Friends.this, Report.class);
+            intent.putExtra("userId", userId); // optional if Report needs userId
             startActivity(intent);
         });
     }
-
-
-
 }

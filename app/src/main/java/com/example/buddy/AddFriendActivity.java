@@ -15,11 +15,19 @@ public class AddFriendActivity extends AppCompatActivity {
     RadioGroup radioGroupGender;
     RadioButton radioMale, radioFemale;
     DatabaseHelper db;
-
+    int userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friends);
+
+        // Get userId from Intent
+        userId = getIntent().getIntExtra("userId", -1);
+        if (userId == -1) {
+            Toast.makeText(this, "User ID is missing!", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
 
         // Initialize views
         db = new DatabaseHelper(this);
@@ -71,7 +79,8 @@ public class AddFriendActivity extends AppCompatActivity {
                 return;
             }
 
-            if (db.insertFriend(name, gender, dob, phone, email)) {
+            // Insert using userId
+            if (db.insertFriend(userId, name, gender, dob, phone, email)) {
                 Toast.makeText(this, "Friend added successfully", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
