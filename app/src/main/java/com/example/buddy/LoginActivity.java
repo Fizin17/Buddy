@@ -20,10 +20,9 @@ public class LoginActivity extends AppCompatActivity {
 
         db = new DatabaseHelper(this);
 
-        usernameInput = findViewById(R.id.editTextUsername);
-        passwordInput = findViewById(R.id.editTextPassword);
-        loginBtn = findViewById(R.id.buttonLogin);
-        GotoRegisterbtn = findViewById(R.id.buttonGotoRegister);
+        usernameInput = findViewById(R.id.etUsername);
+        passwordInput = findViewById(R.id.etPassword);
+        loginBtn = findViewById(R.id.btnLogin);
 
 
         loginBtn.setOnClickListener(v -> {
@@ -39,10 +38,6 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
             }
-        });
-        GotoRegisterbtn.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, Register.class);
-            startActivity(intent);
         });
 
     }

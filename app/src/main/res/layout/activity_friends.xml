@@ -15,18 +15,15 @@
         android:contentDescription="Profile Icon"
         app:tint="#0f5437" />
 
-    <!-- FIND FRIENDS Title -->
 
-    <!-- Search Icon at Top Right -->
     <TextView
-        android:id="@+id/tvFindFriendsTitle"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/imgProfile"
-        android:layout_marginStart="49dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="-1dp"
-        android:layout_toEndOf="@id/imgProfile"
-        android:text="FIND FRIENDS"
+        android:text="FRIENDS"
         android:textColor="#0f5437"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -35,7 +32,7 @@
         android:id="@+id/imgFind"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_alignTop="@id/tvFindFriendsTitle"
+        android:layout_alignTop="@id/title"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="20dp"
         android:src="@drawable/find"
@@ -43,113 +40,38 @@
         app:tint="#0f5437" />
 
     <!-- Friend List -->
-    <LinearLayout
-        android:id="@+id/friendListLayout"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/friendRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvFindFriendsTitle"
+        android:layout_below="@id/title"
         android:layout_marginTop="40dp"
         android:layout_marginHorizontal="20dp"
-        android:orientation="vertical"
         android:padding="8dp"
-        android:background="#ffffff"
-        android:elevation="2dp">
+        android:clipToPadding="false"
+        android:scrollbars="vertical" />
 
-        <!-- Friend Item 1 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="12dp"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/profile_icon"
-                android:layout_marginEnd="12dp"
-                android:contentDescription="Friend Profile" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Alice"
-                android:textSize="18sp"
-                android:textColor="#0f5437" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/add"
-                android:contentDescription="Add Friend"
-                app:tint="#0f5437" />
-        </LinearLayout>
-
-        <!-- Friend Item 2 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="12dp"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/profile_icon"
-                android:layout_marginEnd="12dp"
-                android:contentDescription="Friend Profile" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Bob"
-                android:textSize="18sp"
-                android:textColor="#0f5437" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/add"
-                android:contentDescription="Add Friend"
-                app:tint="#0f5437" />
-        </LinearLayout>
-
-        <!-- Friend Item 3 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="12dp">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="12dp"
-                android:contentDescription="Friend Profile"
-                android:src="@drawable/profile_icon" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Charlie"
-                android:textColor="#0f5437"
-                android:textSize="18sp" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:contentDescription="Add Friend"
-                android:src="@drawable/add"
-                app:tint="#0f5437" />
-        </LinearLayout>
-    </LinearLayout>
 
     <!-- Bottom Navigation Bar -->
+
+
+    <ImageButton
+        android:id="@+id/btnAddFriend"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="80dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/circle_green"
+        android:contentDescription="Add Friend"
+        android:scaleType="centerInside"
+        android:src="@android:drawable/ic_input_add"
+        app:tint="#FFFFFF"
+        android:clickable="true"
+        android:focusable="true"/>
+
+
     <LinearLayout
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
@@ -162,6 +84,7 @@
 
         <!-- Home -->
         <LinearLayout
+            android:id="@+id/btnHome"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -185,6 +108,7 @@
 
         <!-- Friend -->
         <LinearLayout
+            android:id="@+id/btnFriend"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -208,6 +132,7 @@
 
         <!-- Report -->
         <LinearLayout
+            android:id="@+id/btnReport"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

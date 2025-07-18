@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class Register extends AppCompatActivity {
-    EditText username, password;
+    EditText username, password, email;
     Button registerBtn;
     TextView textViewStatus;
     @Override
@@ -18,11 +18,10 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        username = findViewById(R.id.editTextUsername);
-
-        password = findViewById(R.id.editTextPassword);
-        registerBtn = findViewById(R.id.buttonRegister);
-        textViewStatus = findViewById(R.id.textViewStatus);
+        username = findViewById(R.id.etUsername);
+        email = findViewById(R.id.etEmail);
+        password = findViewById(R.id.etPassword);
+        registerBtn = findViewById(R.id.btnRegister);
 
         DatabaseHelper dbHelper = new DatabaseHelper(this);
 

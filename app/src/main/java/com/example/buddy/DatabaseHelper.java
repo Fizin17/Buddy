@@ -100,4 +100,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return list;
     }
+
+    public ArrayList<Friend> getAllFriends() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Friend> friendList = new ArrayList<>();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + FRIEND_TABLE, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                String gender = cursor.getString(cursor.getColumnIndexOrThrow("gender"));
+                String dob = cursor.getString(cursor.getColumnIndexOrThrow("date_of_birth"));
+                String phone = cursor.getString(cursor.getColumnIndexOrThrow("phone"));
+                String email = cursor.getString(cursor.getColumnIndexOrThrow("email"));
+
+                friendList.add(new Friend(name, gender, dob, phone, email));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return friendList;
+    }
+
 }
