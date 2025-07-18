@@ -133,19 +133,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow("id")); // Get the friend ID
                 String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
                 String gender = cursor.getString(cursor.getColumnIndexOrThrow("gender"));
                 String dob = cursor.getString(cursor.getColumnIndexOrThrow("date_of_birth"));
                 String phone = cursor.getString(cursor.getColumnIndexOrThrow("phone"));
                 String email = cursor.getString(cursor.getColumnIndexOrThrow("email"));
 
-                friendList.add(new Friend(name, gender, dob, phone, email));
+                // Use the constructor that includes the ID
+                friendList.add(new Friend(id, name, gender, dob, phone, email));
             } while (cursor.moveToNext());
         }
 
         cursor.close();
         return friendList;
     }
+
 
     public HashMap<String, Integer> getGenderCounts(int userId) {
         HashMap<String, Integer> genderCounts = new HashMap<>();
@@ -184,4 +187,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return monthCounts;
     }
+
+    public Friend getFriendById(int friendId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + FRIEND_TABLE + " WHERE id = ?",
+                new String[]{String.valueOf(friendId)});
+
+        Friend friend = null;
+        if (cursor.moveToFirst()) {
+            String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+            String gender = cursor.getString(cursor.getColumnIndexOrThrow("gender"));
+            String dob = cursor.getString(cursor.getColumnIndexOrThrow("date_of_birth"));
+            String phone = cursor.getString(cursor.getColumnIndexOrThrow("phone"));
+            String email = cursor.getString(cursor.getColumnIndexOrThrow("email"));
+
+            friend = new Friend(friendId, name, gender, dob, phone, email);
+        }
+        cursor.close();
+        return friend;
+    }
+
+    public boolean updateFriend(int friendId, String name, String gender, String dob, String phone, String email){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name", name);
+        values.put("gender", gender);
+        values.put("date_of_birth", dob);
+        values.put("phone", phone);
+        values.put("email", email);
+
+        int rowsAffected = db.update(FRIEND_TABLE, values, "id=?", new String[]{String.valueOf(friendId)});
+        return rowsAffected > 0;
+    }
+    public boolean deleteFriend(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rows = db.delete(FRIEND_TABLE, "id=?", new String[]{String.valueOf(id)});
+        return rows > 0;
+    }
+
+
 }

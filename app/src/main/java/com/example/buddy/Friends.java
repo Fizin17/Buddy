@@ -7,9 +7,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
 public class Friends extends AppCompatActivity {
@@ -20,6 +23,7 @@ public class Friends extends AppCompatActivity {
     ArrayList<Friend> friendList;
     DatabaseHelper dbHelper;
     int userId;
+    ActivityResultLauncher<Intent> friendDetailsLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,28 +43,26 @@ public class Friends extends AppCompatActivity {
         friendRecyclerView = findViewById(R.id.friendRecyclerView);
         friendRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Initialize database and fetch data
         dbHelper = new DatabaseHelper(this);
-        friendList = dbHelper.getAllFriends(userId); // PASS userId
+        friendList = dbHelper.getAllFriends(userId);
 
-        // Create and set adapter — pass context and list
-        friendAdapter = new FriendAdapter(Friends.this, friendList);
-        friendRecyclerView.setAdapter(friendAdapter);
-
-        // Add friend button click
-        addFriend.setOnClickListener(v -> {
-            Intent intent = new Intent(Friends.this, AddFriendActivity.class);
-            intent.putExtra("userId", userId); // PASS userId to AddFriendActivity
-            startActivity(intent);
+        // Initialize adapter
+        friendAdapter = new FriendAdapter(this, friendList, friend -> {
+            Intent intent = new Intent(Friends.this, FriendDetails.class);
+            intent.putExtra("friend", friend);
+            friendDetailsLauncher.launch(intent);
         });
 
+        friendRecyclerView.setAdapter(friendAdapter);
+
+        // Search functionality
         EditText etSearch = findViewById(R.id.etSearch);
-        ImageView imgFind = findViewById(R.id.imgFind);  // Already exists
+        ImageView imgFind = findViewById(R.id.imgFind);
 
         imgFind.setOnClickListener(v -> {
             String keyword = etSearch.getText().toString().trim().toLowerCase();
             if (keyword.isEmpty()) {
-                friendAdapter.updateList(friendList); // Show full list
+                loadFriendList();
             } else {
                 ArrayList<Friend> filteredList = new ArrayList<>();
                 for (Friend f : friendList) {
@@ -72,20 +74,56 @@ public class Friends extends AppCompatActivity {
             }
         });
 
-
-        // Bottom navigation
-        findViewById(R.id.btnHome).setOnClickListener(v -> {
-            finish(); // go back to home (if you started Friends with startActivity)
+        // Add new friend
+        addFriend.setOnClickListener(v -> {
+            Intent intent = new Intent(Friends.this, AddFriendActivity.class);
+            intent.putExtra("userId", userId);
+            startActivity(intent);
         });
 
+        // Bottom navigation
+        findViewById(R.id.btnHome).setOnClickListener(v -> finish());
         findViewById(R.id.btnFriend).setOnClickListener(v -> {
             Toast.makeText(this, "Already In Friends Page", Toast.LENGTH_SHORT).show();
         });
-
         findViewById(R.id.btnReport).setOnClickListener(v -> {
             Intent intent = new Intent(Friends.this, Report.class);
-            intent.putExtra("userId", userId); // optional if Report needs userId
+            intent.putExtra("userId", userId);
             startActivity(intent);
         });
+
+        // FriendDetails launcher result
+        friendDetailsLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        loadFriendList();
+                    }
+                }
+        );
     }
+
+    // Reload list from DB
+    private void loadFriendList() {
+        friendList = dbHelper.getAllFriends(userId);
+        if (friendAdapter == null) {
+            friendAdapter = new FriendAdapter(this, friendList, friend -> {
+                Intent intent = new Intent(Friends.this, FriendDetails.class);
+                intent.putExtra("friend", friend);
+                friendDetailsLauncher.launch(intent);
+            });
+            friendRecyclerView.setAdapter(friendAdapter);
+        } else {
+            // update the list
+            friendAdapter.updateList(friendList);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadFriendList();
+    }
+
+
 }
