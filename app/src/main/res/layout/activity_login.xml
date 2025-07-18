@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:textSize="30sp"
+        android:textSize="50sp"
         android:textStyle="bold"
         android:textColor="#0f5437"
         android:layout_centerHorizontal="true"
@@ -24,15 +24,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_below="@id/tvLoginTitle"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:padding="30dp"
-        android:background="#0f5437"
+        android:background="@drawable/rounded_box"
         android:layout_centerHorizontal="true"
         android:layout_marginHorizontal="20dp"
         android:elevation="4dp"
         android:gravity="center_horizontal">
 
-        <!-- Username Label -->
+
+    <!-- Username Label -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Register"
+            android:text="Log In"
             android:textColor="#000000"
             android:backgroundTint="#FFFFFF"
             android:padding="12dp"
@@ -92,11 +93,4 @@
 
     </LinearLayout>
 
-    <!-- Bottom Bar -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="2dp"
-        android:background="#0f5437" />
 </RelativeLayout>

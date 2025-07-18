@@ -20,7 +20,7 @@ public class AddFriendActivity extends AppCompatActivity {
         dobInput = findViewById(R.id.editTextDob);
         phoneInput = findViewById(R.id.editTextPhone);
         emailInput = findViewById(R.id.editTextEmail);
-        addFriendBtn = findViewById(R.id.buttonAddFriend);
+        addFriendBtn = findViewById(R.id.buttonAdd);
 
         addFriendBtn.setOnClickListener(v -> {
             String name = nameInput.getText().toString();

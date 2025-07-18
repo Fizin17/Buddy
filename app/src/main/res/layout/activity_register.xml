@@ -11,19 +11,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Up"
-        android:textSize="30sp"
+        android:textSize="50sp"
         android:textStyle="bold"
         android:textColor="#0f5437"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp" />
-
-    <!-- Bottom Bar (unchanged, sticks to bottom) -->
-    <View
-        android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:background="#0f5437" />
 
     <!-- Input Box -->
     <LinearLayout
@@ -32,15 +24,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_below="@id/tvRegisterTitle"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:padding="30dp"
-        android:background="#0f5437"
+        android:background="@drawable/rounded_box"
         android:layout_centerHorizontal="true"
         android:layout_marginHorizontal="20dp"
         android:elevation="4dp"
         android:gravity="center_horizontal">
 
-        <!-- Username Label -->
+
+    <!-- Username Label -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
