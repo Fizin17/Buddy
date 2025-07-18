@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendViewHolder> {
@@ -58,4 +59,10 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendView
             tvFriendName = itemView.findViewById(R.id.tvFriendName);
         }
     }
+
+    public void updateList(ArrayList<Friend> newList) {
+        this.friendList = newList;
+        notifyDataSetChanged();
+    }
+
 }

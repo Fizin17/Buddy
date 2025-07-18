@@ -2,7 +2,9 @@ package com.example.buddy;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,6 +53,25 @@ public class Friends extends AppCompatActivity {
             intent.putExtra("userId", userId); // PASS userId to AddFriendActivity
             startActivity(intent);
         });
+
+        EditText etSearch = findViewById(R.id.etSearch);
+        ImageView imgFind = findViewById(R.id.imgFind);  // Already exists
+
+        imgFind.setOnClickListener(v -> {
+            String keyword = etSearch.getText().toString().trim().toLowerCase();
+            if (keyword.isEmpty()) {
+                friendAdapter.updateList(friendList); // Show full list
+            } else {
+                ArrayList<Friend> filteredList = new ArrayList<>();
+                for (Friend f : friendList) {
+                    if (f.getName().toLowerCase().contains(keyword)) {
+                        filteredList.add(f);
+                    }
+                }
+                friendAdapter.updateList(filteredList);
+            }
+        });
+
 
         // Bottom navigation
         findViewById(R.id.btnHome).setOnClickListener(v -> {

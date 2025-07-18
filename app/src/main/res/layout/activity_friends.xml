@@ -27,6 +27,21 @@
         android:textColor="#0f5437"
         android:textSize="30sp"
         android:textStyle="bold" />
+    <EditText
+        android:id="@+id/etSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Search friend by name"
+        android:padding="10dp"
+        android:background="@android:drawable/edit_text"
+        android:inputType="text"
+        android:textColor="#000"
+        android:textColorHint="#888"/>
+
 
     <ImageView
         android:id="@+id/imgFind"
@@ -44,16 +59,12 @@
         android:id="@+id/friendRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title"
-        android:layout_marginTop="40dp"
+        android:layout_below="@id/etSearch"
+        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="20dp"
         android:padding="8dp"
         android:clipToPadding="false"
         android:scrollbars="vertical" />
-
-
-    <!-- Bottom Navigation Bar -->
-
 
     <ImageButton
         android:id="@+id/btnAddFriend"
@@ -71,7 +82,7 @@
         android:clickable="true"
         android:focusable="true"/>
 
-
+    <!-- Bottom Navigation Bar -->
     <LinearLayout
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
