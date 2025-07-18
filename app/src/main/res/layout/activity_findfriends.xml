@@ -14,8 +14,7 @@
         android:src="@drawable/profile_icon"
         android:contentDescription="Profile Icon"
         app:tint="#0f5437" />
-
-    <!-- FIND FRIENDS Title -->
+    
 
     <!-- Search Icon at Top Right -->
     <TextView
