@@ -6,7 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Date;
 import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -141,5 +145,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         cursor.close();
         return friendList;
+    }
+
+    public HashMap<String, Integer> getGenderCounts(int userId) {
+        HashMap<String, Integer> genderCounts = new HashMap<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT gender FROM " + FRIEND_TABLE + " WHERE user_id = ?", new String[]{String.valueOf(userId)});
+
+        while (cursor.moveToNext()) {
+            String gender = cursor.getString(0);
+            genderCounts.put(gender, genderCounts.getOrDefault(gender, 0) + 1);
+        }
+
+        cursor.close();
+        return genderCounts;
+    }
+
+    public int[] getBirthMonthCounts(int userId) {
+        int[] monthCounts = new int[12]; // Jan to Dec
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT date_of_birth FROM " + FRIEND_TABLE + " WHERE user_id = ?", new String[]{String.valueOf(userId)});
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+        while (cursor.moveToNext()) {
+            String dobStr = cursor.getString(0);
+            try {
+                Date dob = sdf.parse(dobStr);
+                if (dob != null) {
+                    int month = dob.getMonth(); // 0 = Jan, 11 = Dec
+                    monthCounts[month]++;
+                }
+            } catch (ParseException e) {
+                Log.e("DBHelper", "Invalid date format: " + dobStr);
+            }
+        }
+
+        cursor.close();
+        return monthCounts;
     }
 }

@@ -1,6 +1,8 @@
 package com.example.buddy;
 
 import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.charts.BarChart;
@@ -14,11 +16,14 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Report extends AppCompatActivity {
 
     PieChart genderPieChart;
     BarChart birthdayBarChart;
+    int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +33,28 @@ public class Report extends AppCompatActivity {
         genderPieChart = findViewById(R.id.genderPieChart);
         birthdayBarChart = findViewById(R.id.birthdayBarChart);
 
+
+        // Get userId from intent
+        userId = getIntent().getIntExtra("userId", -1);
+        if (userId == -1) {
+            Toast.makeText(this, "User ID not found", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+
         setupPieChart();
         setupBarChart();
     }
 
     private void setupPieChart() {
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        HashMap<String, Integer> genderCounts = dbHelper.getGenderCounts(userId);
+
         ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(8f, "Female"));
-        entries.add(new PieEntry(5f, "Male"));
-        entries.add(new PieEntry(2f, "Other"));
+        for (Map.Entry<String, Integer> entry : genderCounts.entrySet()) {
+            entries.add(new PieEntry(entry.getValue(), entry.getKey()));
+        }
 
         PieDataSet dataSet = new PieDataSet(entries, "Gender Distribution");
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
@@ -44,7 +62,7 @@ public class Report extends AppCompatActivity {
         data.setValueTextSize(14f);
 
         genderPieChart.setData(data);
-        genderPieChart.setUsePercentValues(false); // show actual numbers
+        genderPieChart.setUsePercentValues(false);
         genderPieChart.getDescription().setEnabled(false);
         genderPieChart.setDrawHoleEnabled(false);
         genderPieChart.setCenterText("Gender");
@@ -52,28 +70,19 @@ public class Report extends AppCompatActivity {
         genderPieChart.invalidate();
     }
 
-
     private void setupBarChart() {
-        ArrayList<BarEntry> entries = new ArrayList<>();
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        int[] monthCounts = dbHelper.getBirthMonthCounts(userId);
 
-        // Example: Jan = 3 people, Feb = 5, Mar = 1, etc.
-        entries.add(new BarEntry(0, 3));
-        entries.add(new BarEntry(1, 5));
-        entries.add(new BarEntry(2, 1));
-        entries.add(new BarEntry(3, 6));
-        entries.add(new BarEntry(4, 2));
-        entries.add(new BarEntry(5, 4));
-        entries.add(new BarEntry(6, 7));
-        entries.add(new BarEntry(7, 3));
-        entries.add(new BarEntry(8, 0));
-        entries.add(new BarEntry(9, 2));
-        entries.add(new BarEntry(10, 4));
-        entries.add(new BarEntry(11, 1));
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            entries.add(new BarEntry(i, monthCounts[i]));
+        }
 
         BarDataSet dataSet = new BarDataSet(entries, "Birthdays per Month");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         BarData data = new BarData(dataSet);
-        data.setBarWidth(0.9f); // set custom bar width
+        data.setBarWidth(0.9f);
 
         birthdayBarChart.setData(data);
         birthdayBarChart.setFitBars(true);
@@ -83,16 +92,16 @@ public class Report extends AppCompatActivity {
         birthdayBarChart.getAxisRight().setEnabled(false);
         birthdayBarChart.getLegend().setEnabled(false);
 
-        // Add month labels
         String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
         XAxis xAxis = birthdayBarChart.getXAxis();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(months));
         xAxis.setGranularity(1f);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setLabelRotationAngle(45f); // tilt labels
+        xAxis.setLabelRotationAngle(45f);
 
         birthdayBarChart.invalidate();
     }
+
 
 }

@@ -77,7 +77,6 @@
             android:hint="Enter your email"
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
-            android:textColor="#000000"
             android:textColorHint="#000000" />
 
         <!-- Password Label -->
@@ -101,7 +100,6 @@
             android:hint="Enter your password"
             android:inputType="textPassword"
             android:minHeight="48dp"
-            android:textColor="#000000"
             android:textColorHint="#000000" />
 
         <!-- Register Button -->
@@ -115,6 +113,19 @@
             android:backgroundTint="#FFFFFF"
             android:padding="12dp"
         />
+        <!-- Status TextView -->
+        <TextView
+            android:id="@+id/textViewStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#FF0000"
+            android:textSize="14sp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:visibility="visible"
+            />
+
 
     </LinearLayout>
 
