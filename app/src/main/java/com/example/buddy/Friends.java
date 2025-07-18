@@ -2,6 +2,7 @@ package com.example.buddy;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -29,6 +30,8 @@ public class Friends extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);//avoid keyboard kluar
+
 
         // Get userId from intent
         userId = getIntent().getIntExtra("userId", -1);

@@ -58,7 +58,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
-                        android:background="@null" />
+                        android:background="@null"/>
                 </TableRow>
 
                 <TableRow>
@@ -92,7 +92,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
-                        android:background="@null" />
+                        android:background="@null"/>
                 </TableRow>
 
                 <TableRow>
@@ -133,11 +133,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
-                        android:background="@null" />
+                        android:background="@null"/>
                 </TableRow>
             </TableLayout>
 
-            <!-- ... your name, DOB, gender, etc. here ... -->
 
             <!-- Buttons -->
             <LinearLayout
