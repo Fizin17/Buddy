@@ -32,9 +32,11 @@ public class LoginActivity extends AppCompatActivity {
             if (username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             } else if (db.checkUser(username, password)) {
+                int userId = db.getUserId(username, password);
                 Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                finish(); // Optional: prevent going back to login
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                intent.putExtra("userId", userId);
+                startActivity(intent);
             } else {
                 Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show();
             }

@@ -24,12 +24,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/imgProfile"
-        android:layout_centerHorizontal="true"
+        android:layout_marginStart="114dp"
         android:layout_marginTop="-1dp"
+        android:layout_toEndOf="@id/imgProfile"
         android:text="HOME"
         android:textColor="#0f5437"
         android:textSize="30sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/btnFriends"
@@ -38,14 +39,12 @@
         android:layout_below="@id/imgProfile"
         android:layout_margin="20dp"
         android:orientation="vertical"
-        android:background="@drawable/rounded_bg"
+        android:background="#0f5437"
         android:gravity="center"
         android:layout_marginBottom="8dp"
         android:padding="12dp"
         android:layout_marginTop="50dp"
-        android:layout_centerHorizontal="true"
-        android:clickable="true"
-        android:focusable="true">
+        android:layout_centerHorizontal="true">
 
         <ImageView
             android:layout_width="301dp"
@@ -71,19 +70,17 @@
         android:layout_below="@id/btnFriends"
         android:layout_marginHorizontal="20dp"
         android:orientation="vertical"
-        android:background="@drawable/rounded_bg"
+        android:background="#0f5437"
         android:gravity="center"
         android:padding="12dp"
         android:layout_marginBottom="80dp"
-        android:layout_centerHorizontal="true"
-        android:clickable="true"
-        android:focusable="true">
+        android:layout_centerHorizontal="true">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:contentDescription="Visual Graph"
-            android:src="@drawable/chart" />
+     <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/chart"
+        android:contentDescription="Visual Graph" />
 
         <TextView
             android:layout_width="wrap_content"

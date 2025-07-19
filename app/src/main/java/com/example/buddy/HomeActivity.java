@@ -23,17 +23,23 @@ public class HomeActivity extends AppCompatActivity {
         btnHome = findViewById(R.id.btnHome);
 
         btnAddFriend.setOnClickListener(v -> {
+            int userId = getIntent().getIntExtra("userId", -1);
             Intent intent = new Intent(HomeActivity.this, Friends.class);
+            intent.putExtra("userId", userId);
             startActivity(intent);
         });
 
         btnFriend.setOnClickListener(v -> {
+            int userId = getIntent().getIntExtra("userId", -1);
             Intent intent = new Intent(HomeActivity.this, Friends.class);
+            intent.putExtra("userId", userId);
             startActivity(intent);
         });
 
         btnVisualGraph.setOnClickListener(v -> {
+            int userId = getIntent().getIntExtra("userId", -1);
             Intent intent = new Intent(HomeActivity.this, Report.class);
+            intent.putExtra("userId", userId);
             startActivity(intent);
         });
 
@@ -42,7 +48,9 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         btnReport.setOnClickListener(v ->{
-            Intent intent = new Intent(HomeActivity.this, Report.class);
+            int userId = getIntent().getIntExtra("userId", -1);
+            Intent intent = new Intent(HomeActivity.this, ListByMonthActivity.class);
+            intent.putExtra("userId", userId);
             startActivity(intent);
         });
     }

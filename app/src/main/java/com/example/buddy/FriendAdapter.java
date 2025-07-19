@@ -9,16 +9,23 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendViewHolder> {
 
     private List<Friend> friendList;
     private Context context;
+    private OnFriendClickListener listener;
 
-    public FriendAdapter(Context context, List<Friend> friendList) {
+    public interface OnFriendClickListener {
+        void onFriendClick(Friend friend);
+    }
+
+    public FriendAdapter(Context context, ArrayList<Friend> friendList, OnFriendClickListener listener) {
         this.context = context;
         this.friendList = friendList;
+        this.listener = listener;
     }
 
 
@@ -33,15 +40,11 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendView
     public void onBindViewHolder(FriendViewHolder holder, int position) {
         Friend friend = friendList.get(position);
         holder.tvFriendName.setText(friend.getName());
+
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, FriendDetails.class);
-            intent.putExtra("name", friend.getName());
-            intent.putExtra("dob", friend.getDob());
-            intent.putExtra("phone", friend.getPhone());
-            intent.putExtra("gender", friend.getGender());
-            intent.putExtra("email", friend.getEmail());
-            context.startActivity(intent);
+            listener.onFriendClick(friend);
         });
+
 
     }
 
@@ -58,4 +61,10 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendView
             tvFriendName = itemView.findViewById(R.id.tvFriendName);
         }
     }
+
+    public void updateList(ArrayList<Friend> newList) {
+        this.friendList = newList;
+        notifyDataSetChanged();
+    }
+
 }

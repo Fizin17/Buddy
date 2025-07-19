@@ -22,6 +22,7 @@ public class Register extends AppCompatActivity {
         email = findViewById(R.id.etEmail);
         password = findViewById(R.id.etPassword);
         registerBtn = findViewById(R.id.btnRegister);
+        textViewStatus = findViewById(R.id.textViewStatus);
 
         DatabaseHelper dbHelper = new DatabaseHelper(this);
 
