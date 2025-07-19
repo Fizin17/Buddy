@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Buddy</string>
+    <string name="gemini_api_key">AIzaSyA3rQkeK_7YOWxAl6zY5h-CrnFivzl-ia4</string>
+
 </resources>
