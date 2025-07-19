@@ -2,17 +2,18 @@ package com.example.buddy;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 public class Register extends AppCompatActivity {
     EditText username, password, email;
     Button registerBtn;
     TextView textViewStatus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,15 +32,22 @@ public class Register extends AppCompatActivity {
             String p = password.getText().toString().trim();
 
             if (u.isEmpty() || p.isEmpty()) {
+                textViewStatus.setTextColor(Color.RED);
                 textViewStatus.setText("All fields are required");
             } else if (dbHelper.checkUser(u, p)) {
+                textViewStatus.setTextColor(Color.RED);
                 textViewStatus.setText("User already registered");
             } else {
                 boolean success = dbHelper.registerUser(u, p);
                 if (success) {
                     textViewStatus.setTextColor(Color.GREEN);
                     textViewStatus.setText("Registered successfully!");
+                    Toast.makeText(Register.this, "Registered successfully!", Toast.LENGTH_SHORT).show();
+
+                    // Delay and then close the Register activity
+                    new Handler().postDelayed(() -> finish(), 1500);
                 } else {
+                    textViewStatus.setTextColor(Color.RED);
                     textViewStatus.setText("Registration failed");
                 }
             }
