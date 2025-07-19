@@ -1,5 +1,6 @@
 package com.example.buddy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -42,9 +43,27 @@ public class Report extends AppCompatActivity {
             return;
         }
 
-
         setupPieChart();
         setupBarChart();
+
+        //Navigation Button
+        findViewById(R.id.btnHome).setOnClickListener(v -> {
+            finish();
+        });
+
+        findViewById(R.id.btnFriend).setOnClickListener(v -> {
+            int userId = getIntent().getIntExtra("userId", -1);
+            Intent intent = new Intent(Report.this, Friends.class);
+            intent.putExtra("userId", userId);
+            startActivity(intent);
+        });
+
+        findViewById(R.id.btnReport).setOnClickListener(v -> {
+            int userId = getIntent().getIntExtra("userId", -1);
+            Intent intent = new Intent(Report.this, ListByMonthActivity.class);
+            intent.putExtra("userId", userId);
+            startActivity(intent);
+        });
     }
 
     private void setupPieChart() {
@@ -58,15 +77,18 @@ public class Report extends AppCompatActivity {
 
         PieDataSet dataSet = new PieDataSet(entries, "Gender Distribution");
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        dataSet.setValueTextSize(0f);
+        dataSet.setSliceSpace(3f);
         PieData data = new PieData(dataSet);
         data.setValueTextSize(14f);
 
         genderPieChart.setData(data);
         genderPieChart.setUsePercentValues(false);
-        genderPieChart.getDescription().setEnabled(false);
         genderPieChart.setDrawHoleEnabled(false);
-        genderPieChart.setCenterText("Gender");
-        genderPieChart.setCenterTextSize(16f);
+        genderPieChart.setDescription(null);
+        genderPieChart.setDrawEntryLabels(false);
+        genderPieChart.getLegend().setEnabled(false);
+        genderPieChart.setCenterTextSize(18f);
         genderPieChart.invalidate();
     }
 
@@ -81,8 +103,9 @@ public class Report extends AppCompatActivity {
 
         BarDataSet dataSet = new BarDataSet(entries, "Birthdays per Month");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        dataSet.setValueTextSize(0f);
         BarData data = new BarData(dataSet);
-        data.setBarWidth(0.9f);
+        data.setBarWidth(0.7f); //thickness
 
         birthdayBarChart.setData(data);
         birthdayBarChart.setFitBars(true);

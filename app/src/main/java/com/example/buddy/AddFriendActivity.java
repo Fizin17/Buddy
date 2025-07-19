@@ -1,6 +1,7 @@
 package com.example.buddy;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
@@ -86,6 +87,25 @@ public class AddFriendActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Error adding friend", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        //Navigation Button
+        findViewById(R.id.btnHome).setOnClickListener(v -> {
+            Intent intent = new Intent(AddFriendActivity.this, HomeActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            finish();
+        });
+
+        findViewById(R.id.btnFriend).setOnClickListener(v -> {
+            finish();
+        });
+
+        findViewById(R.id.btnReport).setOnClickListener(v -> {
+            int userId = getIntent().getIntExtra("userId", -1);
+            Intent intent = new Intent(AddFriendActivity.this, ListByMonthActivity.class);
+            intent.putExtra("userId", userId);
+            startActivity(intent);
         });
     }
 }

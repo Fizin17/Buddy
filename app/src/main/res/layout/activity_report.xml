@@ -52,40 +52,55 @@
             android:padding="16dp">
 
             <!-- Gender Pie Chart -->
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/genderPieChart"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="230dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp" />
-
-            <TextView
-                android:id="@+id/genderLabel"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Gender"
-                android:layout_gravity="center_horizontal"
-                android:textSize="25sp"
-                android:textColor="#0f5437"
-                android:layout_marginBottom="16dp" />
+                android:background="@drawable/rounded_bg"
+                android:orientation="vertical">
 
-            <!-- Birthday Bar Chart -->
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/birthdayBarChart"
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/genderPieChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp" />
+                <TextView
+                    android:id="@+id/genderLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gender"
+                    android:layout_gravity="center"
+                    android:textSize="25sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:layout_marginBottom="8dp" />
-
-            <TextView
-                android:id="@+id/birthdayLabel"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Birthday Month"
-                android:layout_gravity="center_horizontal"
-                android:textSize="25sp"
-                android:textColor="#0f5437"
-                android:layout_marginBottom="16dp" />
+                android:background="@drawable/rounded_bg"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp">
+                <!-- Birthday Bar Chart -->
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/birthdayBarChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:layout_marginBottom="8dp" />
 
+                <TextView
+                    android:id="@+id/birthdayLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Birthday Month"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="25sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
@@ -102,6 +117,7 @@
 
         <!-- Home -->
         <LinearLayout
+            android:id="@+id/btnHome"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -125,6 +141,7 @@
 
         <!-- Friend -->
         <LinearLayout
+            android:id="@+id/btnFriend"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -148,6 +165,7 @@
 
         <!-- Report -->
         <LinearLayout
+            android:id="@+id/btnReport"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

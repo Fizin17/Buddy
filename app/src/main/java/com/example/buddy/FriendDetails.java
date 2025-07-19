@@ -103,7 +103,7 @@ public class FriendDetails extends AppCompatActivity {
                     parts.put(textPart);
 
                     JSONObject content = new JSONObject();
-                    content.put("role", "user"); // ✅ ADD THIS LINE
+                    content.put("role", "user");
                     content.put("parts", parts);
 
                     JSONArray contents = new JSONArray();
@@ -155,6 +155,24 @@ public class FriendDetails extends AppCompatActivity {
             }).start();
         });
 
+        //Navigation Button
+        findViewById(R.id.btnHome).setOnClickListener(v -> {
+            Intent intent2 = new Intent(FriendDetails.this, HomeActivity.class);
+            intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent2);
+            finish();
+        });
+
+        findViewById(R.id.btnFriend).setOnClickListener(v -> {
+            finish();
+        });
+
+        findViewById(R.id.btnReport).setOnClickListener(v -> {
+            int userId = getIntent().getIntExtra("userId", -1);
+            Intent intent1 = new Intent(FriendDetails.this, ListByMonthActivity.class);
+            intent1.putExtra("userId", userId);
+            startActivity(intent1);
+        });
 
 
     }

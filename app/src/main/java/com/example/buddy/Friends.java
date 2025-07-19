@@ -104,6 +104,23 @@ public class Friends extends AppCompatActivity {
                     }
                 }
         );
+
+        //Navigation Button
+        findViewById(R.id.btnHome).setOnClickListener(v -> {
+            finish();
+        });
+
+        findViewById(R.id.btnFriend).setOnClickListener(v -> {
+            Toast.makeText(this, "Already In Friends Page", Toast.LENGTH_SHORT).show();
+        });
+
+        findViewById(R.id.btnReport).setOnClickListener(v -> {
+            int userId = getIntent().getIntExtra("userId", -1);
+            Intent intent = new Intent(Friends.this, ListByMonthActivity.class);
+            intent.putExtra("userId", userId);
+            startActivity(intent);
+        });
+
     }
 
     // Reload list from DB
@@ -127,6 +144,7 @@ public class Friends extends AppCompatActivity {
         super.onResume();
         loadFriendList();
     }
+
 
 
 }

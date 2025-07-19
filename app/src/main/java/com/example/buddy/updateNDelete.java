@@ -114,6 +114,28 @@ public class updateNDelete extends AppCompatActivity {
             }
         });
 
+        //Navigation Button
+        findViewById(R.id.btnHome).setOnClickListener(v -> {
+            Intent intent2 = new Intent(updateNDelete.this, HomeActivity.class);
+            intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent2);
+            finish();
+        });
+
+        findViewById(R.id.btnFriend).setOnClickListener(v -> {
+            Intent intent2 = new Intent(updateNDelete.this, Friends.class);
+            intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent2);
+            finish();
+        });
+
+        findViewById(R.id.btnReport).setOnClickListener(v -> {
+            int userId = getIntent().getIntExtra("userId", -1);
+            Intent intent = new Intent(updateNDelete.this, ListByMonthActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.putExtra("userId", userId);
+            startActivity(intent);
+        });
 
     }
 }
