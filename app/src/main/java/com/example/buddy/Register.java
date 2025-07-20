@@ -29,16 +29,18 @@ public class Register extends AppCompatActivity {
 
         registerBtn.setOnClickListener(v -> {
             String u = username.getText().toString().trim();
+            String e = email.getText().toString().trim();
             String p = password.getText().toString().trim();
 
-            if (u.isEmpty() || p.isEmpty()) {
+            // Validation
+            if (u.isEmpty() || e.isEmpty() || p.isEmpty()) {
                 textViewStatus.setTextColor(Color.RED);
                 textViewStatus.setText("All fields are required");
-            } else if (dbHelper.checkUser(u, p)) {
+            } else if (dbHelper.isUserExists(u, e)) {
                 textViewStatus.setTextColor(Color.RED);
-                textViewStatus.setText("User already registered");
+                textViewStatus.setText("Username or Email already registered");
             } else {
-                boolean success = dbHelper.registerUser(u, p);
+                boolean success = dbHelper.registerUser(u, e, p);
                 if (success) {
                     textViewStatus.setTextColor(Color.GREEN);
                     textViewStatus.setText("Registered successfully!");

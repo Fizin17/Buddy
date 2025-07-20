@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Buddy.db";
-    public static final int DATABASE_VERSION = 3;
+    public static final int DATABASE_VERSION = 4;
 
     public static final String USER_TABLE = "User";
     public static final String FRIEND_TABLE = "Friend";
@@ -31,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Create User table
         db.execSQL("CREATE TABLE " + USER_TABLE +
-                " (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE, password TEXT)");
+                " (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE, email TEXT, password TEXT)");
 
         // Create Friend table with foreign key to User table
         db.execSQL("CREATE TABLE " + FRIEND_TABLE +
@@ -51,13 +51,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // ----------------------------
     // User Methods
     // ----------------------------
-    public boolean registerUser(String username, String password) {
+    public boolean registerUser(String username, String email, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("username", username);
+        values.put("email", email);
         values.put("password", password);
         long result = db.insert(USER_TABLE, null, values);
         return result != -1;
+    }
+
+    public boolean isUserExists(String username, String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM " + USER_TABLE + " WHERE username = ? OR email = ?",
+                new String[]{username, email});
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        return exists;
     }
 
     public boolean checkUser(String username, String password) {
