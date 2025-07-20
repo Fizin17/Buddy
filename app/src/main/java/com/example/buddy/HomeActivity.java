@@ -9,7 +9,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
-    LinearLayout btnAddFriend, btnVisualGraph, btnFriend, btnHome,btnReport ;
+    LinearLayout btnAddFriend, btnVisualGraph, btnFriend, btnHome, btnReport;
+    Button btnLogout;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,7 @@ public class HomeActivity extends AppCompatActivity {
         btnFriend = findViewById(R.id.btnFriend);
         btnReport = findViewById(R.id.btnReport);
         btnHome = findViewById(R.id.btnHome);
+        btnLogout = findViewById(R.id.btnLogout);
 
         btnAddFriend.setOnClickListener(v -> {
             int userId = getIntent().getIntExtra("userId", -1);
@@ -52,6 +56,13 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(HomeActivity.this, ListByMonthActivity.class);
             intent.putExtra("userId", userId);
             startActivity(intent);
+        });
+
+        btnLogout.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
         });
     }
 }
